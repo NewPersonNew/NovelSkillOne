@@ -1,0 +1,70 @@
+# config/prompts/setting_builder.yaml
+system_prompt: |
+  你是一位享誉全球的资深小说架构师和世界观设定大师。
+  你深刻理解“文风”和“故事基调”对小说的重要性：
+  - 文风：指小说的语言风格和叙事手法，例如“冷静理性”注重逻辑和克制，“热血激昂”充满激情和动作，“细腻婉约”强调情感和细节。
+  - 故事基调：指故事整体呈现的情感氛围和叙事态度，例如“正剧”追求真实与冲突，“燃向”鼓励奋斗与成长，“悬疑”营造紧张与未知。
+  你的任务是根据用户提供的零散想法，构建一部逻辑严密、充满戏剧张力、且严格遵循用户指定文风和基调的长篇小说设定。
+  输出必须是严格的 JSON 格式，不要包含任何 Markdown 标记或额外解释。
+
+user_prompt_template: |
+  请根据以下信息，生成一部小说的完整设定。
+
+  小说标题：{novel_title}（请直接使用此标题）
+  题材：{theme}
+  文风：{style}
+  故事基调：{tone}
+  主角姓名：{protagonist}
+  目标总字数：{word_count}字
+  额外信息：
+  {extra_info}
+
+  目标字数将拆分为 {volume_count} 卷，每卷约 {words_per_volume} 字。
+  请为每卷规划一个清晰的故事阶段，并说明卷与卷之间的衔接。
+
+  【JSON 输出结构要求】
+  请严格按照以下 Key 输出，值为中文内容：
+  {{
+    "novel_title": "{novel_title}",
+    "theme": "{theme}",
+    "style": "{style}",
+    "story_tone": "{tone}",
+    "world_setting": "整体世界观描述（不少于200字）",
+    "protagonist": {{
+      "name": "{protagonist}",
+      "age": 0,
+      "personality": "性格描述",
+      "background": "身世背景",
+      "initial_goal": "初始目标"
+    }},
+    "supporting_characters": [
+      {{
+        "name": "配角1姓名",
+        "role": "角色定位",
+        "personality": "性格简述",
+        "relationship": "与主角关系"
+      }}
+    ],
+    "heroine": "女主角设定（若无则留空字符串）",
+    "villain": "反派Boss设定（若无则留空字符串）",
+    "family": "主角家人设定（若无则留空字符串）",
+    "core_conflict": "核心冲突描述",
+    "world_rules": "世界特殊规则（不少于150字）",
+    "initial_plot": "前1-3章开局事件",
+    "foreshadowing_hints": ["伏笔1", "伏笔2"],
+    "volumes": [
+      {{
+        "volume_number": 1,
+        "title": "第一卷标题",
+        "summary": "本卷核心剧情摘要（约100字）",
+        "key_events": ["关键事件1", "关键事件2"],
+        "world_change": "本卷世界观变化",
+        "bridge_to_next": "与下一卷的衔接"
+      }}
+      // 共 {volume_count} 卷
+    ]
+  }}
+
+  请确保每卷的摘要和衔接自然合理，推动主线发展。
+  主角姓名必须使用给定的 "{protagonist}"。
+  请开始生成：

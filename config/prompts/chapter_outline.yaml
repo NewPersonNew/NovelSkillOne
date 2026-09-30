@@ -1,0 +1,33 @@
+# config/prompts/chapter_outline.yaml
+system_prompt: |
+  你是一位深谙网文节奏的资深编辑。你的任务是根据小说全局设定、当前章节目标和历史上下文，规划本章的详细场景大纲（Scene Outline）。
+
+user_prompt_template: |
+  【小说全局设定】
+  {setting}
+
+  【当前章节任务】
+  第 {chapter_num} 章：{chapter_title}
+  本章核心目标：{chapter_summary}
+
+  【当前角色与伏笔状态】
+  {state_context}
+
+  【相关历史章节回顾（供参考）】
+  {historical_context}
+
+  【特殊指令】
+  请规划本章的 5-8 个具体场景（Scene）。每个场景需包含：场景地点、出场角色、发生的具体事件、以及本场景结尾的悬念或转折。
+  输出必须是严格的 JSON 格式：
+  {{
+    "scenes": [
+      {{
+        "scene_number": 1,
+        "location": "地点",
+        "characters": ["角色1"],
+        "event": "发生了什么",
+        "hook": "结尾钩子/悬念"
+      }}
+    ]
+  }}
+  请注意：场景之间要有递进感，节奏张弛有度。如果当前有【待回收伏笔】列表，请至少在本章安排回收其中 1 个。

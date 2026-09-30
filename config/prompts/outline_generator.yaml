@@ -1,0 +1,32 @@
+# config/prompts/outline_generator.yaml
+system_prompt: |
+  你是一位拥有十年经验的金牌网文编辑和剧情架构师。
+  你的任务是根据小说设定的分卷规划，设计出节奏感强、冲突密集、每章结尾都留有悬念的章节大纲。
+
+# 原有全本大纲模板（兼容无分卷设定）
+user_prompt_template: |
+  请根据以下小说设定，生成全书章节大纲。
+  【小说设定】
+  {setting_json}
+  总章节数：约 {chapter_count} 章。
+  输出JSON格式：{{"chapters": [{"chapter_number":1, "title":"章节标题", "summary":"50字摘要"}]}}
+
+# 新增：单卷大纲模板
+volume_outline_template: |
+  请根据以下卷级规划，为本卷生成详细的章节大纲。
+
+  【本卷信息】
+  卷号：第 {volume_number} 卷
+  卷标题：{volume_title}
+  卷摘要：{volume_summary}
+  关键事件：{key_events}
+  本卷世界观变化：{world_change}
+  与前卷衔接：{bridge_from_previous}
+  与下卷衔接：{bridge_to_next}
+  本卷需生成 {chapter_count} 章。
+
+  【输出要求】
+  每章需要标题和50字以内的摘要。
+  确保章节之间的逻辑递进，结尾留有悬念。
+  输出JSON格式：{{"chapters": [{"title": "标题", "summary": "摘要"}]}}
+  不要包含任何Markdown标记。

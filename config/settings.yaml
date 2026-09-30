@@ -1,0 +1,23 @@
+# config/settings.yaml
+llm:
+  model: "qwen2.5:14b"               # 或 "qwen2.5:14b-q6_K"
+  base_url: "http://localhost:11434"
+  temperature: 0.85
+  max_tokens: 4096
+  timeout: 120
+
+#embedding:
+#  model: "qwen2.5:14b"
+#  base_url: "http://localhost:11434"
+
+embedding:
+  model: "nomic-embed-text"     # 改为专用嵌入模型
+  base_url: "http://localhost:11434"
+
+paths:
+  data_root: "./data"
+  prompts_root: "./config/prompts"
+
+generation:
+  chunk_size: 3000
+  retrieval_top_k: 5
